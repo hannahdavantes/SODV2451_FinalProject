@@ -62,7 +62,7 @@ export default function StudentSearchClasses({
           ) : null}
 
           {filteredClasses.map((classItem) => {
-            const isEnrolled = enrolledClassIds.includes(classItem.id);
+            const isEnrolled = enrolledClassIds.includes(Number(classItem.id));
             const isFull = String(classItem.status).toLowerCase() === "full";
             const statusText = isEnrolled ? "Enrolled" : classItem.status || "Open";
 

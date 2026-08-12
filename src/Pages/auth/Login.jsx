@@ -69,11 +69,11 @@ export default function Login() {
 
     try {
       const data = await loginUser(email.trim(), password);
-      const userRole = String(data.role || "").toLowerCase();
+      const userRole = String(data.role ?? data.Role ?? "").toLowerCase();
 
-      localStorage.setItem("token", data.token || "");
-      localStorage.setItem("email", data.email || email.trim());
-      localStorage.setItem("userId", String(data.userId ?? ""));
+      localStorage.setItem("token", data.token ?? data.Token ?? "");
+      localStorage.setItem("email", data.email ?? data.Email ?? email.trim());
+      localStorage.setItem("userId", String(data.userId ?? data.UserId ?? ""));
       localStorage.setItem("role", userRole);
 
       navigate(ROLE_HOME[userRole] || "/", {

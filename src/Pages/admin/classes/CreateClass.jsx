@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../../components/Layout";
 import { createClass } from "../../../api/classesApi";
+import { courseAPI } from "../../../api/courseAPI";
+import { getTeachers } from "../../../services/teacherService";
 
 export default function CreateClass() {
   const navigate = useNavigate();
+
+  const [courses, setCourses] = useState([]);
+  const [teachers, setTeachers] = useState([]);
 
   const [formData, setFormData] = useState({
     course: "",
@@ -14,12 +19,22 @@ export default function CreateClass() {
     deliveryMode: "",
   });
 
+  useEffect(() => {
+    courseAPI.getAll().then(setCourses).catch(console.error);
+    getTeachers().then(setTeachers).catch(console.error);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
+  const handleCourseChange = (e) => {
+    const selected = courses.find((c) => c.code === e.target.value);
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      course: selected ? selected.code : "",
+      name: selected ? selected.name : "",
     }));
   };
 
@@ -74,11 +89,10 @@ export default function CreateClass() {
               </label>
 
               <input
-                name="course"
+                className="w-full border p-3 rounded bg-gray-100"
                 value={formData.course}
-                onChange={handleChange}
-                className="w-full border p-3 rounded"
-                placeholder="Course Code"
+                placeholder="Auto-filled from course"
+                readOnly
               />
             </div>
 
@@ -87,13 +101,18 @@ export default function CreateClass() {
                 Course
               </label>
 
-              <input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
+              <select
+                value={formData.course}
+                onChange={handleCourseChange}
                 className="w-full border p-3 rounded"
-                placeholder="Introduction to Programming"
-              />
+              >
+                <option value="" disabled>Select a course</option>
+                {courses.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
@@ -101,13 +120,19 @@ export default function CreateClass() {
                 Instructor
               </label>
 
-              <input
+              <select
                 name="teacher"
                 value={formData.teacher}
                 onChange={handleChange}
                 className="w-full border p-3 rounded"
-                placeholder="John Smith"
-              />
+              >
+                <option value="" disabled>Select an instructor</option>
+                {teachers.map((t) => (
+                  <option key={t.id} value={t.name}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
