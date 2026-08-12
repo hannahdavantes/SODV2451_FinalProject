@@ -38,8 +38,8 @@ export default function EditClass() {
 
     const updatedClass = {
       name: name,
-      roomNum: room,
-      status: status,
+      room: room,
+      deliveryMode: status,
     };
 
     try {

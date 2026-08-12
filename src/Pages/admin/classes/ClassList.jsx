@@ -83,19 +83,19 @@ export default function ClassList() {
                   key={cls.id}
                   className="border-b"
                 >
-                  <td className="py-4">{cls.course}</td>
+                  <td className="py-4">{cls.id}</td>
 
                   <td>{cls.name}</td>
 
-                  <td>{cls.instructor}</td>
+                  <td>{cls.teacherName}</td>
 
                   <td>{cls.room}</td>
 
-                  <td>{cls.capacity}</td>
+                  <td>{cls.enrollmentCount}</td>
 
                   <td>
                     <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
-                      {cls.status}
+                      {cls.deliveryMode}
                     </span>
                   </td>
 

@@ -41,7 +41,7 @@ if (!classData) {
   return (
     <Layout>
       
-      <div class="main_section">
+      <div className="main_section">
         <h1 className="text-3xl font-bold mb-6">
           Class Details
         </h1>
