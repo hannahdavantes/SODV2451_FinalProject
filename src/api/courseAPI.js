@@ -1,5 +1,5 @@
 // courseAPI.js
-const BASE_URL = "http://localhost:5239/api/courses";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/courses`;
 
 export const courseAPI = {
   // GET: api/courses or api/courses?search=...
