@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, BookOpen, LayoutDashboard, LogOut, Search, UserCircle } from "lucide-react";
+import { Bell, BookOpen, LayoutDashboard, LogOut, Menu, Search, UserCircle, X } from "lucide-react";
 import StudentDashboard from "./StudentDashboard";
 import StudentSearchClasses from "./StudentSearchClasses";
 import StudentClassDetails from "./StudentClassDetails";
@@ -20,6 +20,7 @@ export default function StudentApp() {
   const [enrolledClassIds, setEnrolledClassIds] = useState([]);
   const [enrolledClasses, setEnrolledClasses] = useState([]);
   const [studentName, setStudentName] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const email = localStorage.getItem("email") || "";
   const role = localStorage.getItem("role") || "student";
@@ -94,6 +95,7 @@ export default function StudentApp() {
   function goToPage(pageName) {
     setPage(pageName);
     setEnrollmentMessage("");
+    setSidebarOpen(false);
   }
 
   async function enrollInClass(classId) {
@@ -191,8 +193,24 @@ export default function StudentApp() {
 
   return (
     <div className="student-app">
-      <aside className="student-sidebar">
-        <div className="student-sidebar-brand">BVC Portal</div>
+      {sidebarOpen && (
+        <div
+          className="student-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <aside className={`student-sidebar${sidebarOpen ? " student-sidebar--open" : ""}`}>
+        <div className="student-sidebar-brand">
+          BVC Portal
+          <button
+            className="student-sidebar-close"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close navigation"
+          >
+            <X size={18} />
+          </button>
+        </div>
         <nav className="student-nav" aria-label="Student navigation">
           <button
             className={page === "dashboard" ? "student-nav-button active" : "student-nav-button"}
@@ -234,6 +252,13 @@ export default function StudentApp() {
 
       <div className="student-main-shell">
         <header className="student-topbar">
+          <button
+            className="student-menu-btn"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open navigation"
+          >
+            <Menu size={20} />
+          </button>
           <div className="student-top-search">
             <span className="student-search-icon">
               <Search size={16} />

@@ -269,6 +269,11 @@
 /* Small screens */
 @media (max-width: 480px) {
   .login-card {
-    padding: 28px 22px;
+    padding: 28px 20px;
+  }
+
+  .login-toggle-btn {
+    font-size: 0.8rem;
+    padding: 5px 4px;
   }
 }

@@ -36,6 +36,7 @@ import StudentApp from "./Pages/student/StudentApp";
 import TeacherMyClasses from "./Pages/teacher/MyClasses";
 import TeacherClassDetails from "./Pages/teacher/ClassDetails";
 import TeacherClassStudents from "./Pages/teacher/ClassStudents";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -87,16 +88,16 @@ function App() {
         <Route path="/student/*" element={<StudentApp />} />
 
         {/* Teacher Routes */}
-        <Route path="/teacher/classes" element={<TeacherMyClasses />} />
+        <Route path="/teacher/classes" element={<Layout><TeacherMyClasses /></Layout>} />
 
         <Route
           path="/teacher/classes/:classCode/details"
-          element={<TeacherClassDetails />}
+          element={<Layout><TeacherClassDetails /></Layout>}
         />
 
         <Route
           path="/teacher/classes/:classCode/students"
-          element={<TeacherClassStudents />}
+          element={<Layout><TeacherClassStudents /></Layout>}
         />
 
         {/* 404 */}

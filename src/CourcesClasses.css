@@ -44,10 +44,10 @@ a {
   padding: 20px;
   position: fixed;
   left: 245px;
-  top: 0;
+  top: 65px;
   width: 80%;
   overflow-y: auto;
-  height: 100%;
+  height: calc(100% - 65px);
 }
 
 /* =========================
@@ -79,21 +79,48 @@ a {
   gap: 10px;
 }
 
-.sidebar a {
+.sidebar a,
+.sidebar button {
   padding: 12px 14px;
-    border-radius: 10px;
-    display: block;
-    color: #111;
-    transition: 0.2s;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+  transition: background 0.2s;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-.sidebar a:hover {
+.sidebar a:hover,
+.sidebar button:hover {
   background: #f3f4f6;
 }
 
-.sidebar a.active {
+.sidebar a.active,
+.sidebar button.active {
   background: #111827;
   color: white;
+}
+
+.sidebar-nav-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
 }
 
 /* =========================
@@ -342,4 +369,170 @@ tr:hover {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+/* =========================
+   Admin / Teacher Top Bar
+========================= */
+
+.layout-main-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.layout-topbar {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.layout-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: #1f2937;
+}
+
+.layout-user-avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #111827;
+  color: white;
+}
+
+.layout-user-avatar svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Hamburger — hidden on desktop */
+.layout-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: #1f2937;
+  border-radius: 6px;
+}
+
+.layout-menu-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+}
+
+/* Close button inside sidebar — hidden on desktop */
+.sidebar .sidebar-close-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #1f2937;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.sidebar .sidebar-close-btn:hover {
+  background: #f3f4f6;
+}
+
+/* =========================
+   Mobile (≤ 768px)
+========================= */
+
+@media (max-width: 768px) {
+  /* Sidebar slides off-screen by default */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 50;
+  }
+
+  .sidebar.sidebar--open {
+    transform: translateX(0);
+  }
+
+  /* Sidebar logo row: space-between for close button */
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Show close button inside sidebar */
+  .sidebar .sidebar-close-btn {
+    display: flex;
+  }
+
+  /* Show hamburger in topbar */
+  .layout-menu-btn {
+    display: flex;
+  }
+
+  /* Topbar: space-between so hamburger is on left, user on right */
+  .layout-topbar {
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  /* Main section: un-fix so it flows inside <main> */
+  .main_section {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 16px;
+  }
+
+  /* Tables: let each card scroll horizontally */
+  .main_section > div {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Modal: responsive width */
+  .modal {
+    width: min(90vw, 420px);
+    margin: 16px;
+  }
+
+  /* Forms: single column */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Details: single column */
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
 }

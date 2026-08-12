@@ -318,3 +318,57 @@ body {
   font-size: 14px;
   color: #71717a;
 }
+
+/* =========================
+   Mobile (≤ 768px)
+========================= */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px 16px;
+  }
+
+  /* Card header: stack controls below title */
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card-controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  /* Search box: full width on mobile */
+  .search-box {
+    width: 100%;
+  }
+
+  /* Stat grid: single column */
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tables: horizontal scroll */
+  .card {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 480px;
+  }
+
+  /* Actions column: wrap buttons */
+  .table td.actions {
+    white-space: normal;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-end;
+  }
+
+  .btn-outline {
+    margin-left: 0;
+  }
+}

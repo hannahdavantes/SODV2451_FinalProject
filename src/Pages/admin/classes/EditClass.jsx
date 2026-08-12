@@ -23,7 +23,7 @@ export default function EditClass() {
         setName(data.name);
         setInstructor(data.teacherName);
         setRoom(data.room);
-        setCapacity(data.enrollmentCount);
+        setCapacity(data.capacity);
         setStatus(data.deliveryMode);
       } catch (error) {
         console.error("Error loading class:", error);
@@ -37,9 +37,10 @@ export default function EditClass() {
     e.preventDefault();
 
     const updatedClass = {
-      name: name,
-      room: room,
-      deliveryMode: status,
+      Name: name,
+      Room: room,
+      Capacity: Number(capacity),
+      DeliveryMode: status,
     };
 
     try {
@@ -72,54 +73,69 @@ export default function EditClass() {
           <div className="grid grid-cols-2 gap-6">
 
             {/* Course Code (Read Only) */}
-            <input
-              value={course}
-              readOnly
-              className="border p-3 rounded bg-gray-100"
-              placeholder="Course Code"
-            />
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Course Code</label>
+              <input
+                value={course}
+                readOnly
+                className="border p-3 rounded bg-gray-100"
+              />
+            </div>
 
             {/* Class Name (Editable) */}
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border p-3 rounded"
-              placeholder="Class Name"
-            />
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Class Name</label>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border p-3 rounded"
+              />
+            </div>
 
             {/* Instructor (Read Only) */}
-            <input
-              value={instructor}
-              readOnly
-              className="border p-3 rounded bg-gray-100"
-              placeholder="Instructor"
-            />
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Instructor</label>
+              <input
+                value={instructor}
+                readOnly
+                className="border p-3 rounded bg-gray-100"
+              />
+            </div>
 
             {/* Room (Editable) */}
-            <input
-              value={room}
-              onChange={(e) => setRoom(e.target.value)}
-              className="border p-3 rounded"
-              placeholder="Room"
-            />
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Room</label>
+              <input
+                value={room}
+                onChange={(e) => setRoom(e.target.value)}
+                className="border p-3 rounded"
+              />
+            </div>
 
-            {/* Capacity (Read Only) */}
-            <input
-              value={capacity}
-              readOnly
-              className="border p-3 rounded bg-gray-100"
-              placeholder="Capacity"
-            />
+            {/* Capacity (Editable) */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Capacity</label>
+              <input
+                type="number"
+                value={capacity}
+                onChange={(e) => setCapacity(e.target.value)}
+                className="border p-3 rounded"
+                min="1"
+              />
+            </div>
 
             {/* Status (Editable Dropdown) */}
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="border p-3 rounded"
-            >
-              <option value="Online">Online</option>
-              <option value="In Person">In Person</option>
-            </select>
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Delivery Mode</label>
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="border p-3 rounded"
+              >
+                <option value="Online">Online</option>
+                <option value="In Person">In Person</option>
+              </select>
+            </div>
 
           </div>
 
