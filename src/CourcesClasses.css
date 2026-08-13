@@ -380,6 +380,7 @@ tr:hover {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-left: 250px;
 }
 
 .layout-topbar {
@@ -501,6 +502,11 @@ tr:hover {
   .layout-topbar {
     justify-content: space-between;
     padding: 0 16px;
+  }
+
+  /* Main shell: no sidebar offset on mobile */
+  .layout-main-shell {
+    margin-left: 0;
   }
 
   /* Main section: un-fix so it flows inside <main> */

@@ -60,7 +60,6 @@ function MyClasses() {
               <tr>
                 <th>Class Code</th>
                 <th>Course Name</th>
-                <th>Room</th>
                 <th>Capacity</th>
                 <th style={{ textAlign: 'right' }}>Actions</th>
               </tr>
@@ -70,7 +69,6 @@ function MyClasses() {
                 <tr key={cls.id}>
                   <td className="bold">{cls.course}</td>
                   <td>{cls.name}</td>
-                  <td>{cls.room}</td>
                   <td>{cls.capacity}</td>
                   <td className="actions">
                     <button

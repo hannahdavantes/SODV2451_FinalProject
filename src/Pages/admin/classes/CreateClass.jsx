@@ -15,9 +15,14 @@ export default function CreateClass() {
     course: "",
     name: "",
     teacher: "",
-    room: "",
     deliveryMode: "",
   });
+
+  const capacityForMode = (mode) => {
+    if (mode === "Online") return 45;
+    if (mode === "In Person") return 30;
+    return "";
+  };
 
   useEffect(() => {
     courseAPI.getAll().then(setCourses).catch(console.error);
@@ -45,7 +50,6 @@ export default function CreateClass() {
       CourseCode: formData.course,
       Name: formData.name,
       TeacherName: formData.teacher,
-      Room: formData.room,
       DeliveryMode: formData.deliveryMode,
     };
 
@@ -137,21 +141,7 @@ export default function CreateClass() {
 
             <div>
               <label className="block mb-2 font-medium">
-                Room
-              </label>
-
-              <input
-                name="room"
-                value={formData.room}
-                onChange={handleChange}
-                className="w-full border p-3 rounded"
-                placeholder="Room 201"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2 font-medium">
-                Status
+                Delivery Mode
               </label>
 
               <select
@@ -166,6 +156,19 @@ export default function CreateClass() {
                 <option value="In Person">In Person</option>
                 <option value="Online">Online</option>
               </select>
+            </div>
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Capacity
+              </label>
+
+              <input
+                className="w-full border p-3 rounded bg-gray-100"
+                value={capacityForMode(formData.deliveryMode)}
+                placeholder="Based on delivery mode"
+                disabled
+              />
             </div>
 
           </div>

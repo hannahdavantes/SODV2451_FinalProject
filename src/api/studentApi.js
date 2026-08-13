@@ -42,7 +42,6 @@ function normalizeClassListItem(classItem) {
     course: classItem.Course ?? classItem.course ?? "",
     name: classItem.Name ?? classItem.name ?? "",
     instructor: classItem.Instructor ?? classItem.instructor ?? "",
-    room: classItem.Room ?? classItem.room ?? "",
     status: classItem.Status ?? classItem.status ?? "",
     capacity: classItem.Capacity ?? classItem.capacity ?? "",
   };
@@ -54,7 +53,6 @@ function normalizeClassDetails(classItem) {
     code: classItem.code ?? classItem.Code ?? classItem.course ?? classItem.Course ?? "",
     name: classItem.name ?? classItem.Name ?? "",
     teacherName: classItem.teacherName ?? classItem.TeacherName ?? classItem.instructor ?? classItem.Instructor ?? "",
-    room: classItem.room ?? classItem.Room ?? "",
     deliveryMode: classItem.deliveryMode ?? classItem.DeliveryMode ?? "",
     enrollmentCount: classItem.enrollmentCount ?? classItem.EnrollmentCount ?? 0,
   };

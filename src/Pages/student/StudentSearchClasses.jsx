@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BookOpen, Calendar, Clock, Search, Users } from "lucide-react";
+import { BookOpen, Clock, Search, Users } from "lucide-react";
 
 export default function StudentSearchClasses({
   classes,
@@ -79,10 +79,6 @@ export default function StudentSearchClasses({
                     <span>
                       <Clock size={16} />
                       Instructor: {classItem.instructor || "Not available"}
-                    </span>
-                    <span>
-                      <Calendar size={16} />
-                      Room: {classItem.room || "Not available"}
                     </span>
                     <span>
                       <Users size={16} />

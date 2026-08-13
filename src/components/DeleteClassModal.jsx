@@ -4,7 +4,8 @@ function DeleteClassModal({
   isOpen,
   onClose,
   onDelete,
-  classId
+  classId,
+  error
 }) {
   if (!isOpen) {
     return null;
@@ -15,11 +16,17 @@ function DeleteClassModal({
 
       <div className="modal">
 
-        <h2>Delete Class</h2> 
+        <h2>Delete Class</h2>
         <p>
           Are you sure you want to delete class id:
           <strong> {classId}</strong>?
         </p>
+
+        {error && (
+          <p style={{ color: "crimson", marginTop: "8px" }}>
+            {error}
+          </p>
+        )}
 
         <div className="modal-actions">
 
@@ -31,11 +38,11 @@ function DeleteClassModal({
             Cancel
           </button>
 
-{/*Confirms deletion and calls the delete function*/ }
           <button
             className="btn btn-danger"
             onClick={onDelete}
             type="button"
+            disabled={!!error}
           >
             Delete
           </button>

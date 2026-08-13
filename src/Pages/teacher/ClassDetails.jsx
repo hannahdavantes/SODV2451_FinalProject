@@ -67,14 +67,6 @@ function ClassDetails() {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon stat-icon-green">📍</div>
-          <div className="stat-content">
-            <div className="stat-label">Room</div>
-            <div className="stat-value">{classInfo.room}</div>
-          </div>
-        </div>
-
-        <div className="stat-card">
           <div className="stat-icon stat-icon-purple">💻</div>
           <div className="stat-content">
             <div className="stat-label">Delivery Mode</div>

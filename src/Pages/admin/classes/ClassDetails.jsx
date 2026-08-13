@@ -72,11 +72,6 @@ if (!classData) {
             </div>
 
             <div>
-              <strong>Room</strong>
-              <p>{classData.room}</p>
-            </div>
-
-            <div>
               <strong>Capacity</strong>
               <p>{classData.enrollmentCount}</p>
             </div>

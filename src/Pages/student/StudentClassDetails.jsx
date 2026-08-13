@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, Calendar, Clock, MapPin, Users } from "lucide-react";
+import { BookOpen, Calendar, Clock, Users } from "lucide-react";
 import { getClassDetails } from "../../api/studentApi";
 
 export default function StudentClassDetails({
@@ -137,17 +137,6 @@ export default function StudentClassDetails({
                 <strong>
                   {classDetails.teacherName || "Not available"}
                 </strong>
-              </div>
-            </div>
-
-            <div className="student-detail-item">
-              <span className="student-detail-icon orange">
-                <MapPin size={21} />
-              </span>
-
-              <div>
-                <p>Room</p>
-                <strong>{classDetails.room || "Not available"}</strong>
               </div>
             </div>
 

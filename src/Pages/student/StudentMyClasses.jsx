@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, Clock, Users } from "lucide-react";
+import { BookOpen, Clock, Users } from "lucide-react";
 
 export default function StudentMyClasses({ enrolledClasses, dropClass }) {
   return (
@@ -36,10 +36,6 @@ export default function StudentMyClasses({ enrolledClasses, dropClass }) {
                   <span>
                     <Clock size={16} />
                     Instructor: {classItem.instructor || "Not available"}
-                  </span>
-                  <span>
-                    <Calendar size={16} />
-                    Room: {classItem.room || "Not available"}
                   </span>
                   <span>
                     <Users size={16} />

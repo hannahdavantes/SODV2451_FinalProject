@@ -7,6 +7,7 @@ import { getClasses, deleteClass } from "../../../api/classesApi";
 export default function ClassList() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [deleteError, setDeleteError] = useState("");
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
@@ -24,12 +25,16 @@ export default function ClassList() {
 }, []);
 
   const handleDelete = async () => {
-    await deleteClass(selectedClass?.id)
-
-    setShowDeleteModal(false);
-    setSelectedClass(null);
-
-    window.location.reload(false);
+    try {
+      await deleteClass(selectedClass?.id);
+      setShowDeleteModal(false);
+      setSelectedClass(null);
+      setDeleteError("");
+      window.location.reload(false);
+    } catch (error) {
+      const message = error.response?.data || "Failed to delete class.";
+      setDeleteError(message);
+    }
   };
 
   return (
@@ -70,7 +75,6 @@ export default function ClassList() {
                 <th className="py-3">Class ID</th>
                 <th className="py-3">Course</th>
                 <th className="py-3">Instructor</th>
-                <th className="py-3">Room</th>
                 <th className="py-3">Capacity</th>
                 <th className="py-3">Status</th>
                 <th className="py-3 w-36">Actions</th>
@@ -87,15 +91,13 @@ export default function ClassList() {
 
                   <td>{cls.name}</td>
 
-                  <td>{cls.teacherName}</td>
+                  <td>{cls.instructor}</td>
 
-                  <td>{cls.room}</td>
-
-                  <td>{cls.enrollmentCount}</td>
+                  <td>{cls.capacity}</td>
 
                   <td>
                     <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
-                      {cls.deliveryMode}
+                      {cls.status}
                     </span>
                   </td>
 
@@ -139,9 +141,11 @@ export default function ClassList() {
       <DeleteClassModal
         isOpen={showDeleteModal}
         classId={selectedClass?.id}
+        error={deleteError}
         onClose={() => {
           setShowDeleteModal(false);
           setSelectedClass(null);
+          setDeleteError("");
         }}
         onDelete={handleDelete}
       />

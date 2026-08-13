@@ -10,9 +10,13 @@ export default function EditClass() {
   const [course, setCourse] = useState("");
   const [name, setName] = useState("");
   const [instructor, setInstructor] = useState("");
-  const [room, setRoom] = useState("");
-  const [capacity, setCapacity] = useState("");
   const [status, setStatus] = useState("");
+
+  const capacityForMode = (mode) => {
+    if (mode === "Online") return 45;
+    if (mode === "In Person") return 30;
+    return "";
+  };
 
   useEffect(() => {
     const loadClass = async () => {
@@ -22,8 +26,6 @@ export default function EditClass() {
         setCourse(data.code);
         setName(data.name);
         setInstructor(data.teacherName);
-        setRoom(data.room);
-        setCapacity(data.capacity);
         setStatus(data.deliveryMode);
       } catch (error) {
         console.error("Error loading class:", error);
@@ -38,9 +40,7 @@ export default function EditClass() {
 
     const updatedClass = {
       Name: name,
-      Room: room,
-      Capacity: Number(capacity),
-      DeliveryMode: status,
+      Status: status,
     };
 
     try {
@@ -102,29 +102,6 @@ export default function EditClass() {
               />
             </div>
 
-            {/* Room (Editable) */}
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">Room</label>
-              <input
-                value={room}
-                onChange={(e) => setRoom(e.target.value)}
-                className="border p-3 rounded"
-              />
-            </div>
-
-            {/* Capacity (Editable) */}
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">Capacity</label>
-              <input
-                type="number"
-                value={capacity}
-                onChange={(e) => setCapacity(e.target.value)}
-                className="border p-3 rounded"
-                min="1"
-              />
-            </div>
-
-            {/* Status (Editable Dropdown) */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700">Delivery Mode</label>
               <select
@@ -135,6 +112,16 @@ export default function EditClass() {
                 <option value="Online">Online</option>
                 <option value="In Person">In Person</option>
               </select>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">Capacity</label>
+              <input
+                type="number"
+                value={capacityForMode(status)}
+                disabled
+                className="border p-3 rounded bg-gray-100"
+              />
             </div>
 
           </div>
