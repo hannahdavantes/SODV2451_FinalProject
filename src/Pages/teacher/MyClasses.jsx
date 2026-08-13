@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getClasses } from '../../api/classesApi';
+import { getTeacherClasses } from '../../api/classesApi';
 import './TeacherStyles.css';
 
 function MyClasses() {
@@ -10,7 +10,8 @@ function MyClasses() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getClasses()
+    const teacherId = localStorage.getItem("userId");
+    getTeacherClasses(teacherId)
       .then((data) => {
         setClasses(data);
         setLoading(false);

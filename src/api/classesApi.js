@@ -4,8 +4,21 @@ const API = axios.create({
     baseURL: `${import.meta.env.VITE_API_URL}/api`
 });
 
+API.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
 export const getClasses = async () => {
     const response = await API.get("/classes/");
+    return response.data;
+};
+
+export const getTeacherClasses = async (teacherId) => {
+    const response = await API.get(`/classes/teacher/${teacherId}`);
     return response.data;
 };
 
